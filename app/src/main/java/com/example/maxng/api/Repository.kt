@@ -1,6 +1,5 @@
 package com.example.maxng.api
 
-import android.util.Log
 import com.example.maxng.localDB.LocalDaoImplementation
 import com.example.maxng.models.mapper.Domain
 import com.example.maxng.utils.Status

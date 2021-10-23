@@ -6,8 +6,8 @@ import com.example.maxng.models.mapper.Domain
 
 class RecyclerViewViewHolder(private val itemBinding: RecyclerViewItemBinding) :
     RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(data: Domain) {
-            itemBinding.domain = data
-            itemBinding.executePendingBindings()
-        }
+    fun bind(data: Domain) {
+        itemBinding.domain = data
+        itemBinding.executePendingBindings()
     }
+}

@@ -4,14 +4,12 @@ import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.widget.ImageView
-import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.maxng.R
 import com.example.maxng.api.Repository
-import com.example.maxng.constants.AppConstants
 import com.example.maxng.models.mapper.Domain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
@@ -49,49 +47,40 @@ class AppViewModel @Inject constructor(
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    @BindingAdapter("favouriteStarWar")
     fun showFavourite(
         imageView: ImageView,
         currentData: Domain
     ) {
-        if (currentData.liked) {
-            imageView.setImageResource(AppConstants.hearts[1])
-        } else {
-            imageView.setImageResource(AppConstants.hearts[0])
-        }
+        val cur = ((imageView.drawable) as Drawable)
+        val likedDrawable = imageView.context.resources.getDrawable(
+            R.drawable.ic_liked,
+            imageView.context.theme
+        )
+        val yetToLikeDrawable = imageView.context.resources.getDrawable(
+            R.drawable.ic_yet_to_like,
+            imageView.context.theme
+        )
 
-        imageView.setOnClickListener {
-            val cur = ((imageView.drawable) as Drawable)
-            val likedDrawable = imageView.context.resources.getDrawable(
-                R.drawable.ic_liked,
-                imageView.context.theme
-            )
-            val yetToLikeDrawable = imageView.context.resources.getDrawable(
-                R.drawable.ic_yet_to_like,
-                imageView.context.theme
-            )
-
-            if (cur == likedDrawable) {
-                currentData.apply {
-                    liked = false
-                }
-                like(currentData)
-                imageView.setImageResource(R.drawable.ic_yet_to_like)
-            } else if (cur == yetToLikeDrawable) {
-                currentData.apply { liked = true }
-                like(currentData)
-                imageView.setImageResource(R.drawable.ic_liked)
+        if (cur == likedDrawable) {
+            currentData.apply {
+                liked = false
             }
+            like(currentData)
+            imageView.setImageResource(R.drawable.ic_yet_to_like)
+        } else if (cur == yetToLikeDrawable) {
+            currentData.apply { liked = true }
+            like(currentData)
+            imageView.setImageResource(R.drawable.ic_liked)
         }
     }
 
     private fun fetchAllCategories() {
-        fetchFromDataBase("films", _filmsStarWars)
-        fetchFromDataBase("people", _peopleStarWars)
-        fetchFromDataBase("starShips", _spaceShipsStarWars)
-        fetchFromDataBase("species", _speciesStarWars)
-        fetchFromDataBase("planets", _planetsStarWars)
-        fetchFromDataBase("vehicles", _vehiclesStarWars)
+        fetchFromDataBase("Films", _filmsStarWars)
+        fetchFromDataBase("People", _peopleStarWars)
+        fetchFromDataBase("SpaceShips", _spaceShipsStarWars)
+        fetchFromDataBase("Species", _speciesStarWars)
+        fetchFromDataBase("Planets", _planetsStarWars)
+        fetchFromDataBase("Vehicles", _vehiclesStarWars)
     }
 
     private fun fetchFromDataBase(
@@ -106,7 +95,6 @@ class AppViewModel @Inject constructor(
             viewModelScope.launch {
                 repository.fetchFromRoom(hasFetchedAndCached, category)
                     ?.collect { dataFromLocalDB ->
-                        Log.d("gettingSomethingFromDB?", dataFromLocalDB.size.toString())
                         mutableLiveDataToHoldTheResult.postValue(dataFromLocalDB)
                     }
             }

@@ -18,7 +18,7 @@ class Vehicles : Fragment() {
 
     private val viewModel: AppViewModel by viewModels()
     private lateinit var binding: FragmentVehiclesBinding
-    private lateinit var adapter: StarWarsRecyclerViewAdapter
+    private lateinit var myAdapter: StarWarsRecyclerViewAdapter
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -28,13 +28,13 @@ class Vehicles : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_vehicles, container, false)
-        adapter = StarWarsRecyclerViewAdapter()
+        myAdapter = StarWarsRecyclerViewAdapter()
 
         // Setting data to the adapter
         viewModel.vehiclesStarWars.observe(
             viewLifecycleOwner,
             {
-                adapter.setStarWars(it)
+                myAdapter.setStarWars(it)
             }
         )
 
@@ -44,7 +44,10 @@ class Vehicles : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView = binding.filmsRv
-        recyclerView.adapter = adapter
+        recyclerView.apply {
+            itemAnimator?.changeDuration = 0
+            adapter = myAdapter
+        }
         binding.apply { lifecycleOwner = viewLifecycleOwner }
     }
 }

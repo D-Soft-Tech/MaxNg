@@ -2,10 +2,20 @@ package com.example.maxng.ui.adapters
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import com.example.maxng.constants.AppConstants.IMAGES
-import com.example.maxng.constants.AppConstants.randomNum
+import coil.load
+import com.example.maxng.constants.AppConstants
+import com.example.maxng.models.mapper.Domain
 
 @BindingAdapter("loadRandomImage")
-fun loadRandomImage(imageView: ImageView, holder: String) {
-    imageView.setImageResource(IMAGES[randomNum])
+fun loadRandomImage(imageView: ImageView, data: Domain) {
+    imageView.load(data.image)
+}
+
+@BindingAdapter("showFavouriteDrawable")
+fun loadFavDrawable(imageView: ImageView, currentData: Domain) {
+    if (currentData.liked) {
+        imageView.setImageResource(AppConstants.hearts[1])
+    } else {
+        imageView.setImageResource(AppConstants.hearts[0])
+    }
 }
