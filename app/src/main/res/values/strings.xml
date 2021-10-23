@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MaxNG</string>
+    <string name="city_icon_descr">star war character image</string>
+    <string name="user_icon">User Image</string>
+    <string name="likes">Likes</string>
+    <string name="notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_favourites">MY FAVOURITES</string>
+    <string name="favourite_fragment">MY FAVOURITES</string>
+</resources>
