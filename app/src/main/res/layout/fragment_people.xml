@@ -22,5 +22,15 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/recycler_view_item" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/films_rv"
+            app:layout_constraintStart_toStartOf="@+id/films_rv"
+            app:layout_constraintTop_toTopOf="@+id/films_rv" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

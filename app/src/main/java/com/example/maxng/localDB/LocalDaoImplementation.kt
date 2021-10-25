@@ -12,10 +12,14 @@ class LocalDaoImplementation @Inject constructor(
         return localDao.getData(category)
     }
 
-    suspend fun insertOrUpdate(data: Domain) {
-        localDao.insertOrUpdate(data)
+    suspend fun insert(data: Domain) {
+        localDao.insert(data)
     }
 
-    fun getLiked(): Flow<List<Domain>> =
-        localDao.getLiked()
+    suspend fun update(data: Domain) {
+        localDao.update(data)
+    }
+
+    fun getLiked(check: Int): Flow<List<Domain>> =
+        localDao.getLiked(check)
 }

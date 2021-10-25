@@ -1,5 +1,8 @@
 package com.example.maxng.constants
 
+import android.view.View
+import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
 import com.example.maxng.R
 import com.example.maxng.ui.Films
 import com.example.maxng.ui.People
@@ -10,7 +13,7 @@ import com.example.maxng.ui.Vehicles
 
 object AppConstants {
     val tabTitles = arrayOf("Films", "People", "Spaceships", "Species", "Planets", "Vehicles")
-    val destinations = arrayOf(
+    val destinations: Array<Fragment> = arrayOf(
         Films(),
         People(),
         Spaceships(),
@@ -41,4 +44,12 @@ object AppConstants {
         R.drawable.ic_yet_to_like,
         R.drawable.ic_liked
     )
+
+    fun ProgressBar.show() {
+        this.visibility = View.VISIBLE
+    }
+
+    fun ProgressBar.hide() {
+        this.visibility = View.GONE
+    }
 }

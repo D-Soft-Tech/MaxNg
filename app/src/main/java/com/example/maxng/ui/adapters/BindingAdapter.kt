@@ -19,3 +19,12 @@ fun loadFavDrawable(imageView: ImageView, currentData: Domain) {
         imageView.setImageResource(AppConstants.hearts[0])
     }
 }
+
+@BindingAdapter("changeDrawableAtOnClick")
+fun changeDrawableAtOnClick(imageView: ImageView, currentData: Domain) {
+    if (currentData.liked) {
+        imageView.setImageResource(AppConstants.hearts[1])
+    } else {
+        imageView.setImageResource(AppConstants.hearts[0])
+    }
+}

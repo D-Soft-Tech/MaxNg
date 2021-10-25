@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
             name="domain"
             type="com.example.maxng.models.mapper.Domain" />
+        <import type="com.example.maxng.constants.AppConstants" />
 
     </data>
 
@@ -84,6 +84,7 @@
             android:layout_marginEnd="@dimen/dimen_20dp"
             app:layout_constraintBottom_toBottomOf="@+id/rel_date"
             app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="@string/city_icon_descr"
             app:layout_constraintTop_toTopOf="@+id/char_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

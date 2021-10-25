@@ -20,7 +20,7 @@ class Repository @Inject constructor(
                 when (filmsFromRemote.status) {
                     Status.SUCCESS -> {
                         filmsFromRemote.data!!.forEach { film ->
-                            localDataSource.insertOrUpdate(film)
+                            localDataSource.insert(film)
                         }
                     }
                     else -> {
@@ -33,7 +33,7 @@ class Repository @Inject constructor(
                 when (peopleFromRemote.status) {
                     Status.SUCCESS -> {
                         peopleFromRemote.data!!.forEach { person ->
-                            localDataSource.insertOrUpdate(person)
+                            localDataSource.insert(person)
                         }
                     } else -> {
                         // Do nothing
@@ -45,7 +45,7 @@ class Repository @Inject constructor(
                 when (spaceShipsFromRemote.status) {
                     Status.SUCCESS -> {
                         spaceShipsFromRemote.data!!.forEach { spaceShip ->
-                            localDataSource.insertOrUpdate(spaceShip)
+                            localDataSource.insert(spaceShip)
                         }
                     }
                     else -> {
@@ -58,7 +58,7 @@ class Repository @Inject constructor(
                 when (speciesFromRemote.status) {
                     Status.SUCCESS -> {
                         speciesFromRemote.data!!.forEach { specie ->
-                            localDataSource.insertOrUpdate(specie)
+                            localDataSource.insert(specie)
                         }
                     } else -> {
                         // Do nothing
@@ -70,7 +70,7 @@ class Repository @Inject constructor(
                 when (planetsFromRemote.status) {
                     Status.SUCCESS -> {
                         planetsFromRemote.data!!.forEach { planet ->
-                            localDataSource.insertOrUpdate(planet)
+                            localDataSource.insert(planet)
                         }
                     }
                     else -> {
@@ -83,7 +83,7 @@ class Repository @Inject constructor(
                 when (vehiclesFromRemote.status) {
                     Status.SUCCESS -> {
                         vehiclesFromRemote.data!!.forEach { vehicle ->
-                            localDataSource.insertOrUpdate(vehicle)
+                            localDataSource.insert(vehicle)
                         }
                     } else -> {
                         // Do nothing
@@ -105,9 +105,9 @@ class Repository @Inject constructor(
     }
 
     suspend fun updateLike(data: Domain) {
-        localDataSource.insertOrUpdate(data)
+        localDataSource.update(data)
     }
 
-    fun getLiked(): Flow<List<Domain>> =
-        localDataSource.getLiked()
+    fun getLiked(check: Int): Flow<List<Domain>> =
+        localDataSource.getLiked(check)
 }
