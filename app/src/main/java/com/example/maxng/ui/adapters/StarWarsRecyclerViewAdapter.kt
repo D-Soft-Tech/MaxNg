@@ -39,10 +39,12 @@ class StarWarsRecyclerViewAdapter(
         this.notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setStarWars(newList: List<Domain>) {
         val diff = StarWarsDiffUtil(starWars, newList)
         val diffResult = DiffUtil.calculateDiff(diff)
         starWars = newList
         diffResult.dispatchUpdatesTo(this)
+        this.notifyDataSetChanged()
     }
 }

@@ -48,8 +48,9 @@
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_marginTop="@dimen/dimen_20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:indeterminateDrawable="@drawable/progress_bar_bg"
         app:layout_constraintEnd_toEndOf="@+id/rv"
         app:layout_constraintStart_toStartOf="@+id/rv"
         app:layout_constraintTop_toTopOf="@+id/rv" />

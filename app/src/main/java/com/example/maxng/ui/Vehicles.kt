@@ -48,6 +48,7 @@ class Vehicles : Fragment(), LikeOnClick {
             viewLifecycleOwner,
             {
                 progressBar.hide()
+                binding.test = it[0]
                 myAdapter.setStarWars(it)
             }
         )
@@ -71,6 +72,8 @@ class Vehicles : Fragment(), LikeOnClick {
             R.drawable.ic_liked,
             requireContext().theme
         )
-        viewModel.showFavourite((view.drawable == likedDrawable), data)
+
+        var check = view.drawable == likedDrawable
+        viewModel.showFavourite(check, data)
     }
 }

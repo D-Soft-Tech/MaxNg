@@ -38,14 +38,23 @@ class AppViewModel @Inject constructor(
     fun fetchFromDataBase(
         category: String
     ) {
-        val hasFetchedAndCached = repository.fetchResultsAndSaveToRoom()
+        viewModelScope.launch {
+            repository.fetchFromRoom(true, "Vehicles")?.collect {
+                if (it.isEmpty()) {
+                    val hasFetchedAndCached = repository.fetchResultsAndSaveToRoom()
 
-        if (hasFetchedAndCached) {
-            viewModelScope.launch {
-                repository.fetchFromRoom(hasFetchedAndCached, category)
-                    ?.collect { dataFromLocalDB ->
-                        _singleLiveData.postValue(dataFromLocalDB)
+                    if (hasFetchedAndCached) {
+                        repository.fetchFromRoom(hasFetchedAndCached, category)
+                            ?.collect { dataFromLocalDB ->
+                                _singleLiveData.postValue(dataFromLocalDB)
+                            }
                     }
+                } else {
+                    repository.fetchFromRoom(true, category)
+                        ?.collect { dataFromLocalDB ->
+                            _singleLiveData.postValue(dataFromLocalDB)
+                        }
+                }
             }
         }
     }
