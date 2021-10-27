@@ -77,10 +77,6 @@ class Favourites : Fragment(), LikeOnClick {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun favourite(view: ImageView, data: Domain) {
-        val likedDrawable = resources.getDrawable(
-            R.drawable.ic_liked,
-            requireContext().theme
-        )
         viewModel.showFavourite(data.liked, data)
     }
 }

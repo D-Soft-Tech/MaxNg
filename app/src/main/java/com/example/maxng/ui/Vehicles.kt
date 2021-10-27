@@ -36,10 +36,23 @@ class Vehicles : Fragment(), LikeOnClick {
     ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_vehicles, container, false)
-        myAdapter = StarWarsRecyclerViewAdapter(this, arrayListOf())
+        myAdapter = StarWarsRecyclerViewAdapter(this, arrayListOf()) // Initialize the adapter
 
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        recyclerView = binding.filmsRv // Initialize the recyclerView
+        recyclerView.apply {
+            itemAnimator?.changeDuration = 0 // Remove the animation
+            adapter = myAdapter // Set an adapter to the recyclerView
+        }
+
+        // Initialize the progress bar
         progressBar = binding.progressBar
 
+        // Show the progress bar before observing the livedata
         progressBar.show()
         // Fetch from database
         viewModel.fetchFromDataBase("Vehicles")
@@ -47,32 +60,16 @@ class Vehicles : Fragment(), LikeOnClick {
         viewModel.singleLiveData.observe(
             viewLifecycleOwner,
             {
-                progressBar.hide()
-                binding.test = it[0]
+                progressBar.hide() // Hide the progress bar when the results is ready
                 myAdapter.setStarWars(it)
             }
         )
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        recyclerView = binding.filmsRv
-        recyclerView.apply {
-            itemAnimator?.changeDuration = 0
-            adapter = myAdapter
-        }
         binding.apply { lifecycleOwner = viewLifecycleOwner }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun favourite(view: ImageView, data: Domain) {
-        val likedDrawable = resources.getDrawable(
-            R.drawable.ic_liked,
-            requireContext().theme
-        )
-
         viewModel.showFavourite(data.liked, data)
     }
 }

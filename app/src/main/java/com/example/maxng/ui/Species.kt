@@ -44,8 +44,10 @@ class Species : Fragment(), LikeOnClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initializing the progress bar
         progressBar = binding.progressBar
 
+        // Show the progress bar while before requesting the data
         progressBar.show()
 
         // Fetch from database
@@ -55,25 +57,21 @@ class Species : Fragment(), LikeOnClick {
         viewModel.singleLiveData.observe(
             viewLifecycleOwner,
             {
-                progressBar.hide()
-                myAdapter.setStarWars(it)
+                progressBar.hide() // Hide the progress bar when the data is available
+                myAdapter.setStarWars(it) // Set the data to the adapter
             }
         )
-        // View initialization
+        // Initializing the recyclerview
         recyclerView = binding.filmsRv
         recyclerView.apply {
-            itemAnimator?.changeDuration = 0
-            adapter = myAdapter
+            itemAnimator?.changeDuration = 0 // Setting the recyclerView's animation duration to zero
+            adapter = myAdapter // Setting an adapter to the recyclerview
         }
         binding.apply { lifecycleOwner = viewLifecycleOwner }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun favourite(view: ImageView, data: Domain) {
-        val likedDrawable = resources.getDrawable(
-            R.drawable.ic_liked,
-            requireContext().theme
-        )
         viewModel.showFavourite(data.liked, data)
     }
 }
