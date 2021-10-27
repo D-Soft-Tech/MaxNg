@@ -73,7 +73,6 @@ class Vehicles : Fragment(), LikeOnClick {
             requireContext().theme
         )
 
-        var check = view.drawable == likedDrawable
-        viewModel.showFavourite(check, data)
+        viewModel.showFavourite(data.liked, data)
     }
 }

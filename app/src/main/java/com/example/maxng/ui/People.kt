@@ -75,6 +75,6 @@ class People : Fragment(), LikeOnClick {
             R.drawable.ic_liked,
             requireContext().theme
         )
-        viewModel.showFavourite((view.drawable == likedDrawable), data)
+        viewModel.showFavourite(data.liked, data)
     }
 }
